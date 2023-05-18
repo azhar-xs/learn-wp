@@ -69,3 +69,22 @@ function create_custom_taxonomy() {
 }
 add_action( 'init', 'create_custom_taxonomy' );
 
+function favorite_food_show()
+{
+    add_meta_box(
+        'favorite-food-meta-box',
+        'your favorite food',
+        'meta_box_output',
+        'page',
+        'normal',
+    );
+}
+
+function meta_box_output($post)
+{ ?>
+    <label for="food">Add Your Favorite food</label>
+    <p><input type="text" name="favorite" class="widefat" id="food" value="<?php echo get_post_meta($post->ID,'favorite',true); ?>"></p>
+<?php
+}
+
+add_action('add_meta_box','favorite_food_show');
